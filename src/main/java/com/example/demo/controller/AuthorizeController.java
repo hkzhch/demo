@@ -15,11 +15,11 @@ public class AuthorizeController {
 	@Autowired
 	private GithubProvider githubProvider;
 
-	@Value("git.client.id")
+	@Value("${git.client.id")
 	private String Client_id;
-	@Value("git.client.secret")
+	@Value("${git.client.secret")
 	private String Client_secret;
-	@Value("git.redirect.uri")
+	@Value("${git.redirect.uri")
 	private String Redirect_uri;
 
 	@GetMapping("/callback")
