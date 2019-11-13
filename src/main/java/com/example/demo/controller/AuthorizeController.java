@@ -17,12 +17,12 @@ public class AuthorizeController {
 	@Autowired
 	private GithubProvider githubProvider;
 
-		@Value("${github.client.id}")
-		private String Client_id;
-		@Value("${github.client.secret}")
-		private String Client_secret;
-		@Value("${github.redirect.uri}")
-		private String Redirect_uri;
+	@Value("${github.client.id}")
+	private String Client_id;
+	@Value("${github.client.secret}")
+	private String Client_secret;
+	@Value("${github.redirect.uri}")
+	private String Redirect_uri;
 
 //	private String Client_id="8f839873645001067bbc";
 //	private String Client_secret="00173774aae69cb04341510a87cf67ef07ae9448";
