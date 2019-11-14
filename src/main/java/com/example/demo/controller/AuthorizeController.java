@@ -2,7 +2,9 @@ package com.example.demo.controller;
 
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,37 +32,38 @@ public class AuthorizeController {
 
 	@Autowired
 	private UserMapper userMapper;
+
 	@GetMapping("/callback")
 	public String callback(@RequestParam(name = "code") String code,
 			@RequestParam(name = "state") String state,
-			HttpServletRequest request) {
+			HttpServletRequest request,
+			HttpServletResponse response) {
 
-		AccessTokenDTO accessTokenDTO=new AccessTokenDTO();
+		AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
 		accessTokenDTO.setClient_id(Client_id);
 		accessTokenDTO.setClient_secret(Client_secret);
 		accessTokenDTO.setCode(code);
 		accessTokenDTO.setState(state);
 		accessTokenDTO.setRedirect_uri(Redirect_uri);
-		String accessToken=githubProvider.getAccessToken(accessTokenDTO);
+		String accessToken = githubProvider.getAccessToken(accessTokenDTO);
 		GithubUser githubUser = githubProvider.getUser(accessToken);
-		if(githubUser != null) {
-			User user=new User();
-			user.setToken(UUID.randomUUID().toString());
+		if (githubUser != null) {
+			//ログイン成功
+			User user = new User();
+			String token = UUID.randomUUID().toString();
+			user.setToken(token);
 			user.setName(githubUser.getName());
 			user.setAccountId(String.valueOf(githubUser.getId()));
 			user.setGmtCreate(System.currentTimeMillis());
 			user.setGmtModified(user.getGmtCreate());
 			userMapper.insert(user);
-
-			//ログイン成功
-
-			request.getSession().setAttribute("user", githubUser);
+			response.addCookie(new Cookie("token", token));
+//			request.getSession().setAttribute("user", githubUser);
 			return "redirect:/";
-		}else {
+		} else {
 			//ログイン失敗
 			return "redirect:/";
 		}
-
 
 	}
 }
