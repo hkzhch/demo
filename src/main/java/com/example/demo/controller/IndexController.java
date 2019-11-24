@@ -11,7 +11,7 @@ import com.example.demo.mapper.UserMapper;
 import com.example.demo.model.User;
 
 @Controller
-public class IndexControll {
+public class IndexController {
 
 	@Autowired
 	private UserMapper userMapper;
@@ -19,14 +19,16 @@ public class IndexControll {
 	@GetMapping("/")
 	public String index(HttpServletRequest request) {
 		Cookie[] cookies = request.getCookies();
-		for (Cookie cookie : cookies) {
-			if (cookie.getName().equalsIgnoreCase("token")) {
-				String token = cookie.getValue();
-				User user = userMapper.findByToken(token);
-				if (user != null) {
-					request.getSession().setAttribute("user", user);
+		if(cookies !=null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equalsIgnoreCase("token")) {
+					String token = cookie.getValue();
+					User user = userMapper.findByToken(token);
+					if (user != null) {
+						request.getSession().setAttribute("user", user);
+					}
+					break;
 				}
-				break;
 			}
 		}
 		return "index";
