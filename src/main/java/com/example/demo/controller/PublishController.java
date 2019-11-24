@@ -78,6 +78,7 @@ public class PublishController {
 		question.setGmtCreate(System.currentTimeMillis());
 		question.setGmtModified(question.getGmtCreate());
 		questionMapper.create(question);
+//		model.addAttribute("question",question);
 		return "redirect:/";
 	}
 }
