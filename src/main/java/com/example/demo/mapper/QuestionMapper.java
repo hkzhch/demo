@@ -4,14 +4,19 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.example.demo.model.Question;
 
 @Mapper
 public interface QuestionMapper {
-    @Insert("insert into Question (title,description,gmt_create,gmt_modified,creator,tag) values (#{title},#{description},#{gmtCreate},#{gmtModified},#{creator},#{tag})")
-    public void create(Question question);
-    @Select("select * from Question")
-	public List<Question> List();
+	@Insert("insert into Question (title,description,gmt_create,gmt_modified,creator,tag) values (#{title},#{description},#{gmtCreate},#{gmtModified},#{creator},#{tag})")
+	 void create(Question question);
+
+	@Select("select * from Question limit #{offset},#{size}")
+	 List<Question> list(@Param(value="offset")Integer offset, @Param(value="size")Integer size);
+
+	@Select("select count(1) from Question")
+	 Integer count();
 }
