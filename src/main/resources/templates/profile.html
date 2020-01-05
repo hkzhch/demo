@@ -12,8 +12,8 @@
 <body>
 	<div th:insert="navigation :: nav"></div>
 	<div class="container-fluid main">
-		<div class="row">
-			<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+		<div class="row profile">
+			<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 borderSetting">
 				<h2>
 					<span th:text="${sectionName}"></span>
 				</h2>
@@ -65,7 +65,7 @@
 				</nav>
 			</div>
 			<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-				<div class="list-group">
+				<div class="list-group mylist">
 					<a href="/profile/questions" class="list-group-item"
 						th:classappend="${section=='questions'}?'active':''">
 						我的问题
