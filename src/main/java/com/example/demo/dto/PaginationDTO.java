@@ -24,6 +24,12 @@ public class PaginationDTO {
 			totalPage = totalCount / size + 1;
 		}
 
+		if (page < 1) {
+			page = 1;
+		} else if (page > totalPage) {
+			page = totalPage;
+		}
+
 		this.page = page;
 
 		//生成页数列表
