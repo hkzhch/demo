@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.dto.PaginationDTO;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.model.User;
-import com.example.demo.service.QusetionService;
+import com.example.demo.service.QuestionService;
 
 @Controller
 public class ProfileController {
@@ -21,7 +21,7 @@ public class ProfileController {
 	UserMapper userMapper;
 
 	@Autowired
-	private QusetionService questionService;
+	private QuestionService questionService;
 
 	@GetMapping("/profile/{action}")
 	private String profile(@PathVariable(name = "action") String action,

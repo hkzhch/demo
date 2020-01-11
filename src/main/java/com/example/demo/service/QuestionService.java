@@ -15,7 +15,7 @@ import com.example.demo.model.Question;
 import com.example.demo.model.User;
 
 @Service
-public class QusetionService {
+public class QuestionService {
 	@Autowired
 	private QuestionMapper questionMapper;
 	@Autowired
@@ -62,6 +62,15 @@ public class QusetionService {
 		paginationDTO.setQuestions(questionDTOList);
 		return paginationDTO;
 
+	}
+
+	public QuestionDTO getById(Integer id) {
+		QuestionDTO questionDTO = new QuestionDTO();
+		Question question = questionMapper.getById(id);
+		BeanUtils.copyProperties(question, questionDTO);
+		User user = userMapper.findById(question.getCreator());
+		questionDTO.setUser(user);
+		return questionDTO;
 	}
 
 }

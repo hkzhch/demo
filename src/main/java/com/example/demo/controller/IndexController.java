@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dto.PaginationDTO;
-import com.example.demo.service.QusetionService;
+import com.example.demo.service.QuestionService;
 
 @Controller
 public class IndexController {
 
 	@Autowired
-	private QusetionService questionService;
+	private QuestionService questionService;
 
 	@GetMapping("/")
 	public String index(HttpServletRequest request,
