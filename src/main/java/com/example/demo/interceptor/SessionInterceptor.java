@@ -19,7 +19,9 @@ public class SessionInterceptor implements HandlerInterceptor {
 	UserMapper userMapper;
 
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+	public boolean preHandle(HttpServletRequest request,
+							 HttpServletResponse response,
+							 Object handler)
 			throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
 		Cookie[] cookies = request.getCookies();
